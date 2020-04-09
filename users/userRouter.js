@@ -115,7 +115,7 @@ function validateUser(req, res, next) {
 }
 
 function validatePost(req, res, next) {
-   if (req.body.name && req.body.name.length > 0) {
+   if (req.body.text && req.body.text.length > 0) {
       next();
    } else {
       res.status(400).json({
