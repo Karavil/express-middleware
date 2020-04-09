@@ -39,8 +39,9 @@ router.delete("/:id", validatePostId, (req, res) => {
 router.put("/:id", validatePostId, validatePostEdit, (req, res) => {
    postDB
       .update(req.params.id, req.body)
-      .then((changes) => {
-         res.status(200).json(changes);
+      .then((count) => {
+         if (count) res.status(200).json("Changes applied");
+         else res.status(500).json("Changes could not be applied.");
       })
       .catch((err) => {
          res.status(500).json({ message: "Weird error..." });
@@ -76,7 +77,7 @@ function validatePostEdit(req, res, next) {
       next();
    } else {
       res.status(400).json({
-         message: "Please make sure to input a text for the post.",
+         message: "Please make sure to input a text and user_id for the post.",
       });
    }
 }
