@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
       });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", validatePostID, (req, res) => {
    postDB
       .getById(req.params.id)
       .then((post) => {
@@ -57,7 +57,7 @@ function validatePostId(req, res, next) {
          if (post) {
             next();
          } else {
-            res.status(404).json({ message: "Post id is not valid." });
+            res.status(404).json({ message: "Post id is not valid/found." });
          }
       })
       .catch((err) => {
