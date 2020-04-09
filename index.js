@@ -13,4 +13,4 @@ app.get("/", (req, res) => {
    res.send(`<h2>Let's write some middleware!</h2>`);
 });
 
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
